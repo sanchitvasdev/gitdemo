@@ -1,0 +1,408 @@
+1. $ git init
+Initialized empty Git repository in C:/Users/sanch/OneDrive/Desktop/misc/GitTrack/.git/
+
+2.,3., 4. Created and added two files
+
+touch helloworld.txt
+vim helloworld.txt
+Hello World
+:qa!
+
+touch bestanimal.txt
+vim bestanimal.txt
+Best animal is Tiger.
+:qa!
+
+git add .
+
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   bestanimal.txt
+        new file:   helloworld.txt
+
+Saw the difference using git diff.
+
+git diff --cached
+Binary files /dev/null and b/.helloworld.txt.swp differ
+diff --git a/bestanimal.txt b/bestanimal.txt
+new file mode 100644
+index 0000000..1091e4f
+--- /dev/null
++++ b/bestanimal.txt
+@@ -0,0 +1 @@
++Best animal is Tiger.
+diff --git a/helloworld.txt b/helloworld.txt
+new file mode 100644
+index 0000000..5e1c309
+--- /dev/null
++++ b/helloworld.txt
+@@ -0,0 +1 @@
++Hello World
+\ No newline at end of file
+
+$ git commit -m 'Created two files'
+[master (root-commit) efc54cd] Created two files
+ 3 files changed, 2 insertions(+)
+ create mode 100644 .helloworld.txt.swp
+ create mode 100644 bestanimal.txt
+ create mode 100644 helloworld.txt
+
+Created another file and added that file.
+
+touch bestcolour.txt
+vim bestcolour.txt
+Best colour is Red.
+:qa!
+
+git add .
+git status
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   bestcolour.txt
+
+$ git commit -m 'Added another file'
+[master 51783b6] Added another file
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 bestcolour.txt
+
+Ignored and removed files.
+
+touch .gitignore
+
+Removed bestcolour.txt from the repository.
+git rm --bestcolour.txt --cached
+
+Added bestcolour.txt to .gitignore
+
+Removed bestanimal.txt from the repository.
+git rm bestanimal.txt
+rm 'bestanimal.txt'
+
+git add .
+git status
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   .gitignore
+        deleted:    bestanimal.txt
+
+$ git commit -m 'Deleted and ignored some files'
+[master 21b6877] Deleted and ignored some files
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ create mode 100644 .gitignore
+ delete mode 100644 bestanimal.txt
+ delete mode 100644 bestcolour.txt
+
+5. 
+Removed bestcolour.txt from.gitignore
+$ git add .
+$ git commit -m 'removed bestcolour.txt from gitignore'
+[master 45c397f] removed bestcolour.txt from gitignore
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ create mode 100644 bestcolour.txt
+
+Changed bestcolour.txt
+
+vim bestcolour.txt
+Best Colour is White.
+:wq
+
+Reverted the changed before the staging area.
+$ git checkout bestcolour.txt
+Updated 1 path from the index
+
+6. Changed bestcolour.txt
+vim bestcolour.txt
+Best Colour is White.
+:wq
+
+$ git add .
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   bestcolour.txt
+
+$ git reset HEAD bestcolour.txt
+Unstaged changes after reset:
+M       bestcolour.txt
+
+$ git checkout bestcolour.txt
+Updated 1 path from the index
+
+7. Changed bestcolour.txt
+vim bestcolour.txt
+Best Colour is White.
+:wq
+
+$ git add .
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   bestcolour.txt
+
+$ git commit -m 'Changed bestcolour.txt'
+[master 6b7f41f] Changed bestcolour.txt
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git revert HEAD --no-edit
+[master fbfd074] Revert "Changed bestcolour.txt"
+ Date: Sat Aug 6 12:52:00 2022 +0530
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+8. Changed bestcolour.txt
+vim bestcolour.txt
+Best Colour is White.
+:wq
+
+Before adding to staging area
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   bestcolour.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+After adding to staging area
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   bestcolour.txt
+
+After commiting the changed
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+9. $ git log
+commit cdddf0b2ea346b8eb7d8b24818d2c3adefc888c9 (HEAD -> master)
+Author: sanchit <sanchitvasdev@gmail.com>
+Date:   Sat Aug 6 12:56:20 2022 +0530
+
+    Changed some file
+
+commit fbfd074c65562e6fd63b42ce334d5e3d782a6fcb
+Author: sanchit <sanchitvasdev@gmail.com>
+Date:   Sat Aug 6 12:52:00 2022 +0530
+
+    Revert "Changed bestcolour.txt"
+
+    This reverts commit 6b7f41fc9fefa3a0264fea182f98f401843b0ec2.
+
+commit 6b7f41fc9fefa3a0264fea182f98f401843b0ec2
+Author: sanchit <sanchitvasdev@gmail.com>
+Date:   Sat Aug 6 12:50:04 2022 +0530
+
+    Changed bestcolour.txt
+
+commit 45c397fb513c65ee5b4125e195f2c298f54465a1
+Author: sanchit <sanchitvasdev@gmail.com>
+Date:   Sat Aug 6 12:36:03 2022 +0530
+
+    removed bestcolour.txt from gitignore
+
+commit 21b6877b0185f1571ca00eb1b686f1320b45c804
+Author: sanchit <sanchitvasdev@gmail.com>
+Date:   Sat Aug 6 12:09:40 2022 +0530
+
+    Deleted and ignored some files
+
+commit 51783b6ff980b69d49af4404dd705cbdf6bf30f3
+Author: sanchit <sanchitvasdev@gmail.com>
+Date:   Sat Aug 6 12:01:00 2022 +0530
+
+    Added another file
+
+commit efc54cd6f9c5df64c293616d8eb2291b80710e77
+Author: sanchit <sanchitvasdev@gmail.com>
+Date:   Fri Aug 5 18:16:22 2022 +0530
+
+    Created two files
+(END)
+
+10. $ git show cdddf0
+commit cdddf0b2ea346b8eb7d8b24818d2c3adefc888c9 (HEAD -> master)
+Author: sanchit <sanchitvasdev@gmail.com>
+Date:   Sat Aug 6 12:56:20 2022 +0530
+
+    Changed some file
+
+diff --git a/bestcolour.txt b/bestcolour.txt
+index d6c8cf1..88b1fe9 100644
+--- a/bestcolour.txt
++++ b/bestcolour.txt
+@@ -1 +1 @@
+-Best colour is Blue.
++Best colour is White.
+
+11. Created branch feature1
+
+$ git branch 'feature1'
+$ git branch
+  feature1
+* master
+
+Created branch feature2
+$ git branch 'feature2'
+$ git branch
+  feature1
+  feature2
+* master
+
+Deleted branch 'feature2'
+$ git branch -d 'feature2'
+Deleted branch feature2 (was cdddf0b).
+$ git branch
+  feature1
+* master
+
+12. 
+$ git checkout feature1
+Switched to branch 'feature1'
+
+$ git add .
+$ git status
+On branch feature1
+
+Changed bestcolour.txt
+vim bestcolour.txt
+Best Colour is Blue.
+:wq
+
+$ git add .
+$ git status
+On branch feature1
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   bestcolour.txt
+
+$ git commit -m 'First commit'
+[feature1 2fec2ff] First commit
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+13. $ git checkout master
+Switched to branch 'master'
+
+Changed bestcolour.txt
+vim bestcolour.txt
+Best Colour is Red.
+:wq
+
+Changed helloworld.txt
+vim bestcolour.txt
+Hello World!!
+:wq
+
+$ git add .
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   bestcolour.txt
+        modified:   helloworld.txt
+
+$ git commit -m 'some commits'
+[master 04780a3] some commits
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+14. Created some conflicts
+$ git merge feature1
+Auto-merging bestcolour.txt
+CONFLICT (content): Merge conflict in bestcolour.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+Merged 
+$ git merge feature1
+
+15. Created branch feature2
+$ git branch 'feature2'
+
+$ git branch
+  feature1
+  feature2
+* master
+
+$ git checkout 'feature2'
+Switched to branch 'feature2'
+
+Added bestanimal.txt to feature2 branch.
+
+$ touch bestanimal.txt
+$ vim bestanimal.txt
+Best animal is Tiger.
+:wq
+
+$ git add .
+$ git status
+On branch feature2
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   bestanimal.txt
+$ git commit -m 'Added bestanimal.txt'
+[feature2 50642fe] Added bestanimal.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 bestanimal.txt
+
+16. $ git checkout master
+Switched to branch 'master'
+
+$ touch bestanimal.txt
+$ vim bestanimal.txt
+Best animal is Elephant.
+:wq
+
+$ git add .
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   bestanimal.txt
+
+$ git commit -m 'Added bestanimal file'
+[master c3b086b] Added bestanimal file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 bestanimal.txt
+
+17. Created conflicts.
+
+$ git rebase master
+error: could not apply 50642fe... Added bestanimal.txt
+Resolve all conflicts manually, mark them as resolved with
+"git add/rm <conflicted_files>", then run "git rebase --continue".
+You can instead skip this commit: run "git rebase --skip".
+To abort and get back to the state before "git rebase", run "git rebase --abort".
+Could not apply 50642fe... Added bestanimal.txt
+CONFLICT (add/add): Merge conflict in bestanimal.txt
+Auto-merging bestanimal.txt
+
+Solved conflicts and rebased again
+$ git rebase --continue
+Successfully rebased and updated refs/heads/feature2.
+
+18. Merging is a safe option that preserves the entire history of your repository, while rebasing creates a linear history by moving your feature branch onto the tip of master.
+
+19. Changed bestanimal.txt
+Saved the changes.
+$ git stash
+Saved working directory and index state WIP on master: c3b086b Added bestanimal file
+
+Nothing to add as all the changes are stashed.
+$ git add .
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+20. 
+
